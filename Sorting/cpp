@@ -1,0 +1,54 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+
+// Функция для слияния двух подпоследовательностей
+void BitonicMerge(vector<int>& arr, int StartIndex,
+    int CountElemSorting, bool order) {
+   
+    if (CountElemSorting > 1) { //Если количество сортируемых элементов не больше 1,то массив отсортирован, функция завершает выполнение
+        int MiddleArr = CountElemSorting / 2;  // Индекс середины последовательности, то есть индекс конца последовательности
+        
+        
+        for (int i = StartIndex; i < StartIndex + MiddleArr; i++) { // Итерация по элементам первой подпоследовательности
+            for (int j = i + MiddleArr; j < StartIndex + CountElemSorting; j++) { // Итерация по элементам второй подпоследовательности
+                
+                // Если требуется сортировка в порядке возрастания
+                if (order) {  
+                    if (arr[i] > arr[j]) {
+                        swap(arr[i], arr[j]);
+                    }
+                
+                 
+                // Если требуется сортировка в порядке убывания
+                }
+                else {
+                    if (arr[i] < arr[j]) {
+                        swap(arr[i], arr[j]);
+                    }
+                }
+            }
+        }
+
+        
+        BitonicMerge(arr, StartIndex, MiddleArr, order);  // Рекурсивно сливаем левую подпоследовательность
+        BitonicMerge(arr, StartIndex + MiddleArr, CountElemSorting - MiddleArr, order);  // Рекурсивно сливаем правую подпоследовательность
+    }
+}
+
+
+// Функция для сортировки массива методом битонной сортировки
+void BitonicSort(vector<int>& arr, int StartIndex, int CountElemSorting, bool order) {
+
+    if (CountElemSorting > 1) { //Если количество сортируемых элементов не больше 1,то массив отсортирован, функция завершает выполнение
+        int MiddleArr = CountElemSorting / 2; // Индекс середины последовательности, то есть индекс конца последовательности
+
+        BitonicSort(arr, StartIndex, MiddleArr, true); // Рекурсивно сортируем левую подпоследовательность в порядке возрастания
+        BitonicSort(arr, StartIndex + MiddleArr, CountElemSorting - MiddleArr, false); // Рекурсивно сортируем правую подпоследовательность в порядке убывания
+        
+        BitonicMerge(arr, StartIndex, CountElemSorting, order); // Сливаем две отсортированные подпоследовательности
+    }
+}
+
