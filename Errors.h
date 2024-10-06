@@ -5,16 +5,15 @@
 
 using std::string;
 
-// Error handling for creating a Document object
-class IncorrectDocumentException {
+// Error handling for creating a SortArray
+class IncorrectSortArrayException {
 public:
 	string message = "";
-	IncorrectDocumentException(void) = default;
-	IncorrectDocumentException(string message) {
+	IncorrectSortArrayException(void) = default;
+	IncorrectSortArrayException(string message) {
 		this->message = message;
 	};
 };
-// Error handling when working with files
 class IncorrectAccessFile {
 public:
 	string message = "";

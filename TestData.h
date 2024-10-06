@@ -6,9 +6,7 @@
 #include <vector>
 #include <memory>
 
-#include "DocumentData.h"
-#include "Document.h"
-#include "Mail.h"
+#include "SortArray.h"
 #include "Errors.h"
 #include "fileManager.h"
 
@@ -19,15 +17,15 @@ using std::vector;
 class TestData {
 private:
 	bool is_test_success = true;
-	DocumentData test_document_data;
-	DocumentData file_document_data;
+	SortArray test_sort_array;
+	SortArray file_sort_array;
 public:
-	TestData(string source_data_address, vector<std::unique_ptr<Document>> list) {
-		test_document_data.SetDocumentList(std::move(list));
+	TestData(string source_data_address, vector<std::unique_ptr<double>> list) {
+		test_sort_array.Set(std::move(list));
 		try {
-			ReadOriginalListFromFile(source_data_address, file_document_data);
+			ReadOriginalListFromFile(source_data_address, file_sort_array);
 		}
-		catch (const IncorrectDocumentException& ex) {
+		catch (const IncorrectSortArrayException& ex) {
 			cerr << "Error reading test data from files. It is impossible to conduct tests." << ex.message << endl;
 			is_test_success = false;
 		}
@@ -39,12 +37,12 @@ public:
 	bool InitTest(void) {
 		if (is_test_success == true) {
 			is_test_success = 
-				(test_document_data.GetExportData() == file_document_data.GetExportData());
+				(test_sort_array.GetExportData() == file_sort_array.GetExportData());
 			if (is_test_success == false) {
 				cerr << "Expected data:" << endl;
-				test_document_data.PrintFullDocuments();
+				test_sort_array.Print();
 				cerr << "Resulted data:" << endl;
-				file_document_data.PrintFullDocuments();
+				file_sort_array.Print();
 			}
 		}
 		return is_test_success;

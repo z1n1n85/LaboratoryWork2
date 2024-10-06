@@ -5,9 +5,7 @@
 #include <vector>
 #include <memory>
 
-#include "DocumentData.h"
-#include "Document.h"
-#include "Mail.h"
+#include "SortArray.h"
 #include "Errors.h"
 #include "validInput.h"
 #include "fileManager.h"
@@ -21,23 +19,22 @@ using std::string;
 using std::vector;
 
 void PrintIntro(void) {
-    cout << "Author: Zinin Ilya Nikolaevich" << endl
-        << "Group 4306" << endl
-        << "Option 13" << endl
-        << "Test work #2" << endl
+    cout << "Authors: Kazak-Tyasto Kristina & Zinin Ilya" << endl
+        << "Group 433" << endl
+        << "Laboratory work #2" << endl
+        << "Option 4" << endl
         << endl
-        << "Task text:" << endl
-        << "The base class is an enterprise document. The derived class is mail" << endl
+        << "Sorting algorithm: Bitonic sort" << endl
         << endl;
 }
 void PrintMainMenu(void) {
     cout << endl
         << "/=================================\\" << endl
         << "What do you want to do?" << endl
-        << "1. Add a list of documents manually" << endl
-        << "2. Add a list of documents from the file" << endl
-        << "3. Print a list of documents" << endl
-        << "4. Save the source data to a file" << endl
+        << "1. Add a array manually" << endl
+        << "2. Add a array from the file" << endl
+        << "3. Print a array" << endl
+        << "4. Save the array to a file" << endl
         << "5. Exit the program" << endl
         << "> ";
 }
@@ -51,69 +48,39 @@ int SelectMenuItem(int start, int end) {
     }
     return user_variant;
 }
-void ManualInput(DocumentData& document_data) {
+void ManualInput(SortArray& sort_array) {
     enum MenuManualInput {
         ADD_NEW_ITEM = 0,
         FINISH = 1,
-        MAIL = 0,
-        DOCUMENT = 1,
     };
     int is_addition_complete = 0;
-    int type_document = 0;
-    document_data.ClearList();
+    sort_array.Clear();
     do {
-        std::string title;
-        std::string author;
-        int department_number = 0;
-        std::string content;
-        std::string addresse;
-        int project_number = 0;
-        cout << "(0 - add mail / 1 - add another document)" << endl << ">";
-        type_document = SelectMenuItem(MAIL, DOCUMENT);
-        cout << endl;
-        cout << "Enter the document's author" << endl << ">";
-        author = InputNotEmptyString();
-        cout << "Enter the document's title" << endl << ">";
-        title = InputNotEmptyString();
-        cout << "Enter the document's department number" << endl << ">";
-        department_number = InputPositiveInt();
-        if (type_document == MAIL) {
-            cout << "Enter the document's addresse" << endl << ">";
-            addresse = InputNotEmptyString();
-            cout << "Enter the document's project number (0 if the mail does not relate to the project)" << endl << ">";
-            project_number = InputNaturalInt();
-        }
-        cout << "Enter the document's content" << endl << ">";
-        content = InputNotEmptyString();
+        double number = 0;
+        cout << "Enter the number" << endl << ">";
+        number = InputNumber<double>();
         try {
-            if (type_document == DOCUMENT) {
-                document_data.AddDocument(std::make_unique<Document>(title, author,
-                    department_number, content));
-            }
-            else {
-                document_data.AddDocument(std::make_unique<Mail>(title, author,
-                    department_number, content, addresse, project_number));
-            }
+                sort_array.Add(std::make_unique<double>(number));
         }
-        catch (const IncorrectDocumentException& ex) {
-            cerr << "Data entry error, the document has not been added." << ex.message << endl;
+        catch (const IncorrectSortArrayException& ex) {
+            cerr << "Data entry error, the number has not been added." << ex.message << endl;
         }
         cout << endl
-            << "(0 - add document / 1 - finish adding document)" << endl
+            << "(0 - add number / 1 - finish adding number)" << endl
             << ">";
         is_addition_complete = SelectMenuItem(ADD_NEW_ITEM, FINISH);
     } while (is_addition_complete != FINISH);
 }
-void ReadFile(DocumentData &document_data) {
+void ReadFile(SortArray& sort_array) {
     cout << endl
         << "Enter the address of the file from which you want to download the data" << endl
         << "> ";
     string file_address = GetValidFileName();
     try {
-        ReadOriginalListFromFile(file_address, document_data);
-        document_data.PrintNameDocuments();
+        ReadOriginalListFromFile(file_address, sort_array);
+        sort_array.Print();
     }
-    catch (const IncorrectDocumentException& ex) {
+    catch (const IncorrectSortArrayException& ex) {
         cerr << "The data in the file is stored incorrectly, it cannot be downloaded. "
             << ex.message << endl;
     }
@@ -121,7 +88,7 @@ void ReadFile(DocumentData &document_data) {
         cerr << ex.message << endl;
     }
 }
-void SaveFile(DocumentData& document_data) {
+void SaveFile(SortArray& sort_array) {
     bool is_finish_save = false;
     string file_address = "";
     while (!is_finish_save) {
@@ -135,13 +102,13 @@ void SaveFile(DocumentData& document_data) {
                 cout << "(0 - choose a different address / 1 - overwrite the file)"
                     << endl << ">";
                 if (static_cast<bool>(SelectMenuItem(0, 1))) {
-                    SaveListToFile(file_address, document_data.GetExportData());
+                    SaveListToFile(file_address, sort_array.GetExportData());
                     cout << "File saved successfully!" << endl;
                     is_finish_save = true;
                 }
             }
             else {
-                SaveListToFile(file_address, document_data.GetExportData());
+                SaveListToFile(file_address, sort_array.GetExportData());
                 cout << "The file has been successfully overwritten!" << endl;
                 is_finish_save = true;
             }
@@ -155,46 +122,50 @@ void CreateUI(void) {
     enum MenuVariant {
         MANUAL_INPUT = 1,
         READ_FILE,
-        PRINT_DOCUMENTS,
-        SAVE_DOCUMENTS,
+        SORTING,
+        SAVE,
         EXIT,
     };
     PrintIntro();
-    if (InitTests()) {
+    if (!InitTests()) {
+        cerr << "[Errors were found as a result of the tests.the main "
+            << "functionality of the program is not available]" << endl;
+    }
+    else {
         int user_variant = 0;
-        DocumentData document_data;
+        SortArray sort_array;
         cout << "[All tests were successful!]" << endl;
         do {
             PrintMainMenu();
             user_variant = SelectMenuItem(MANUAL_INPUT, EXIT);
             switch (user_variant) {
             case MANUAL_INPUT: {
-                ManualInput(document_data);
+                ManualInput(sort_array);
                 break;
             }
             case READ_FILE: {
-                ReadFile(document_data);
+                ReadFile(sort_array);
                 break;
             }
-            case PRINT_DOCUMENTS: {
-                if (!document_data.IsListEmpty()) {
-                    document_data.PrintFullDocuments();
+            case SORTING: {
+                if (sort_array.IsEmpty()) {
+                    cerr << "Source data is missing!" << endl;
                 }
-                else { cerr << "Source data is missing!" << endl; }
+                else {
+                    sort_array.Print();
+                }
                 break;
             }
-            case SAVE_DOCUMENTS: {
-                if (!document_data.IsListEmpty()) {
-                    SaveFile(document_data);
+            case SAVE: {
+                if (sort_array.IsEmpty()) {
+                    cerr << "Source data is missing!" << endl;
                 }
-                else { cerr << "Source data is missing!" << endl; }
+                else {
+                    SaveFile(sort_array);
+                }
                 break;
             }
             }
         } while (user_variant != EXIT);
-    }
-    else {
-        cerr << "[Errors were found as a result of the tests.the main "
-            << "functionality of the program is not available]" << endl;
     }
 }

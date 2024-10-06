@@ -83,5 +83,8 @@
     <ClInclude Include="TestData.h">
       <Filter>Class\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Array.h">
+      <Filter>Class\Header</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

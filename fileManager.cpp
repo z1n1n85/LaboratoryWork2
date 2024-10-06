@@ -9,9 +9,7 @@
 #include <stdexcept>
 #include <memory>
 
-#include "DocumentData.h"
-#include "Document.h"
-#include "Mail.h"
+#include "SortArray.h"
 #include "Errors.h"
 #include "consts.h"
 #include "validInput.h"
@@ -79,77 +77,23 @@ void SaveListToFile(const string& file_address, std::string export_string) {
 		throw IncorrectAccessFile(errmsg);
 	}
 }
-void ReadOriginalListFromFile(const string &file_address, DocumentData &document_data) {
-	enum SettingOrder {
-		TYPE = 0,
-		TITLE,
-		AUTHOR,
-		DEPARTMENT_NUMBER,
-		CONTENT,
-		ADDRESSE,
-		PROJECT_NUMBER,
-		ADD_DOCUMENT,
-	};
+void ReadOriginalListFromFile(const string &file_address, SortArray &sort_array) {
 	string line;
 	std::ifstream read_file;
 	read_file.open(file_address);
 	if (read_file.is_open()) {
-		document_data.ClearList();
-		int param_num = 0;
-		string type;
-		string title;
-		string author;
-		int department_number = 0;
-		string content;
-		string addresse;
-		int project_number = 0;
+		sort_array.Clear();
+		double number = 0;
 		while (std::getline(read_file, line)) {
 			try {
-				switch (param_num++) {
-				case TYPE: {
-					type = line;
-					if (type != "MAIL" && type != "DOCUMENT") {
-						throw IncorrectDocumentException("The document type is incorrect or not specified!");
-					}
-					break;
-				}
-				case TITLE: { title = line; break; }
-				case AUTHOR: { author = line; break; }
-				case DEPARTMENT_NUMBER: { department_number = std::stoi(line); break; }
-				case CONTENT: { content = line; break; }
-				case ADDRESSE: {
-					if (type == "MAIL") {
-						addresse = line;
-						break;
-					}
-					else { [[fallthrough]]; }
-				}
-				case PROJECT_NUMBER: {
-					if (type == "MAIL") {
-						project_number = std::stoi(line);
-						break;
-					}
-					else { [[fallthrough]]; }
-				}
-				case ADD_DOCUMENT: {
-					if (type == "MAIL") {
-						document_data.AddDocument(std::make_unique<Mail>(title, author,
-							department_number, content, addresse, project_number));
-					}
-					else {
-						document_data.AddDocument(std::make_unique<Document>(title, author,
-							department_number, content));
-					}
-					param_num = 0;
-					break;
-				}
-				}
+				number = std::stod(line);
+				break;
 			}
 			catch (std::invalid_argument const& ex) {
-				throw IncorrectDocumentException(ex.what());
+				throw IncorrectSortArrayException(ex.what());
 			}
 			catch (std::out_of_range const& ex) {
-				throw IncorrectDocumentException(ex.what());
+				throw IncorrectSortArrayException(ex.what());
 			}
 		}
 		read_file.close();

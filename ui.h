@@ -3,14 +3,14 @@
 
 #include <vector>
 
-#include "DocumentData.h"
+#include "SortArray.h"
 
 void PrintIntro(void);
 void PrintMainMenu(void);
 int SelectMenuItem(int start, int end);
-void ManualInput(DocumentData& document_data);
-void ReadFile(DocumentData& document_data);
-void SaveFile(DocumentData& document_data);
+void ManualInput(SortArray& sort_array);
+void ReadFile(SortArray& sort_array);
+void SaveFile(SortArray& sort_array);
 void CreateUI(void);
 
 #endif
