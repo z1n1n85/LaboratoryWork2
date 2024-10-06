@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Class">
+      <UniqueIdentifier>{da434bfa-119e-4192-b073-fbcd4fe27bdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Header">
+      <UniqueIdentifier>{37c24ebc-1c06-47e6-a644-48e8f49b1813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Source">
+      <UniqueIdentifier>{e4946e72-711b-4b1a-a4d2-70c0fce0eb67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module">
+      <UniqueIdentifier>{0f64a563-a9c0-452b-afbb-52aa48463a41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module\Header">
+      <UniqueIdentifier>{ce428ee0-d057-4697-8e90-2594d3de2ed9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module\Source">
+      <UniqueIdentifier>{0805e771-0ed6-4e68-8e81-b92c6dd33be1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="validInput.cpp">
+      <Filter>Module\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ui.cpp">
+      <Filter>Module\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Module\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Module\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="fileManager.cpp">
+      <Filter>Module\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Document.cpp">
+      <Filter>Class\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentData.cpp">
+      <Filter>Class\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Mail.cpp">
+      <Filter>Class\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="TestData.cpp">
+      <Filter>Class\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Errors.cpp">
+      <Filter>Class\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="consts.h">
+      <Filter>Module\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="fileManager.h">
+      <Filter>Module\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h">
+      <Filter>Module\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ui.h">
+      <Filter>Module\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="validInput.h">
+      <Filter>Module\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Document.h">
+      <Filter>Class\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="DocumentData.h">
+      <Filter>Class\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Errors.h">
+      <Filter>Class\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Mail.h">
+      <Filter>Class\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="TestData.h">
+      <Filter>Class\Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
