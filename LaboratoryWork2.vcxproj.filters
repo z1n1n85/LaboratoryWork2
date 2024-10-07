@@ -36,20 +36,17 @@
     <ClCompile Include="fileManager.cpp">
       <Filter>Module\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Document.cpp">
-      <Filter>Class\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="DocumentData.cpp">
-      <Filter>Class\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Mail.cpp">
-      <Filter>Class\Source</Filter>
-    </ClCompile>
     <ClCompile Include="TestData.cpp">
       <Filter>Class\Source</Filter>
     </ClCompile>
     <ClCompile Include="Errors.cpp">
       <Filter>Class\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="SortArray.cpp">
+      <Filter>Class\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="sorting.cpp">
+      <Filter>Module\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -68,23 +65,17 @@
     <ClInclude Include="validInput.h">
       <Filter>Module\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Document.h">
-      <Filter>Class\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="DocumentData.h">
-      <Filter>Class\Header</Filter>
-    </ClInclude>
     <ClInclude Include="Errors.h">
-      <Filter>Class\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Mail.h">
       <Filter>Class\Header</Filter>
     </ClInclude>
     <ClInclude Include="TestData.h">
       <Filter>Class\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Array.h">
+    <ClInclude Include="SortArray.h">
       <Filter>Class\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="sorting.h">
+      <Filter>Module\Header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

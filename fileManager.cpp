@@ -83,11 +83,11 @@ void ReadOriginalListFromFile(const string &file_address, SortArray &sort_array)
 	read_file.open(file_address);
 	if (read_file.is_open()) {
 		sort_array.Clear();
-		double number = 0;
+		double number = 0.0;
 		while (std::getline(read_file, line)) {
 			try {
 				number = std::stod(line);
-				break;
+				sort_array.Add(number);
 			}
 			catch (std::invalid_argument const& ex) {
 				throw IncorrectSortArrayException(ex.what());

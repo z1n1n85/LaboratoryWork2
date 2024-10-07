@@ -13,7 +13,7 @@ using std::string;
 
 template <typename T>
 T InputNumber(void) {
-    T result = 0;
+    T result;
     cin >> result;
     while (cin.fail()) {
         cin.clear();
@@ -24,6 +24,9 @@ T InputNumber(void) {
     }
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     return result;
+}
+double InputDouble(void) {
+    return InputNumber<double>();
 }
 int InputPositiveInt(void) {
     int result = InputNumber<int>();

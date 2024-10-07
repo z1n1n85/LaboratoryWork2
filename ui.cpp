@@ -33,14 +33,13 @@ void PrintMainMenu(void) {
         << "What do you want to do?" << endl
         << "1. Add a array manually" << endl
         << "2. Add a array from the file" << endl
-        << "3. Print a array" << endl
+        << "3. Sorting a array" << endl
         << "4. Save the array to a file" << endl
         << "5. Exit the program" << endl
         << "> ";
 }
 int SelectMenuItem(int start, int end) {
-    int user_variant = 0;
-    user_variant = InputNumber<int>();
+    int user_variant = InputNumber<int>();
     while (user_variant < start || user_variant > end) {
         cout << "Choose one of the available options" << endl
             << "> ";
@@ -56,11 +55,10 @@ void ManualInput(SortArray& sort_array) {
     int is_addition_complete = 0;
     sort_array.Clear();
     do {
-        double number = 0;
         cout << "Enter the number" << endl << ">";
-        number = InputNumber<double>();
+        double number = InputDouble();
         try {
-                sort_array.Add(std::make_unique<double>(number));
+            sort_array.Add(number);
         }
         catch (const IncorrectSortArrayException& ex) {
             cerr << "Data entry error, the number has not been added." << ex.message << endl;
@@ -85,7 +83,7 @@ void ReadFile(SortArray& sort_array) {
             << ex.message << endl;
     }
     catch (const IncorrectAccessFile& ex) {
-        cerr << ex.message << endl;
+        cerr << "Error: " << ex.message << endl;
     }
 }
 void SaveFile(SortArray& sort_array) {
@@ -152,6 +150,7 @@ void CreateUI(void) {
                     cerr << "Source data is missing!" << endl;
                 }
                 else {
+                    sort_array.Sorting();
                     sort_array.Print();
                 }
                 break;

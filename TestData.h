@@ -20,8 +20,8 @@ private:
 	SortArray test_sort_array;
 	SortArray file_sort_array;
 public:
-	TestData(string source_data_address, vector<std::unique_ptr<double>> list) {
-		test_sort_array.Set(std::move(list));
+	TestData(string source_data_address, vector<double> list) {
+		test_sort_array.Set(list);
 		try {
 			ReadOriginalListFromFile(source_data_address, file_sort_array);
 		}
@@ -36,6 +36,7 @@ public:
 	};
 	bool InitTest(void) {
 		if (is_test_success == true) {
+			file_sort_array.Sorting();
 			is_test_success = 
 				(test_sort_array.GetExportData() == file_sort_array.GetExportData());
 			if (is_test_success == false) {

@@ -129,25 +129,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Document.cpp" />
-    <ClCompile Include="DocumentData.cpp" />
     <ClCompile Include="Errors.cpp" />
     <ClCompile Include="fileManager.cpp" />
-    <ClCompile Include="Mail.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SortArray.cpp" />
+    <ClCompile Include="sorting.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="TestData.cpp" />
     <ClCompile Include="ui.cpp" />
     <ClCompile Include="validInput.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Array.h" />
+    <ClInclude Include="SortArray.h" />
     <ClInclude Include="consts.h" />
-    <ClInclude Include="Document.h" />
-    <ClInclude Include="DocumentData.h" />
     <ClInclude Include="Errors.h" />
     <ClInclude Include="fileManager.h" />
-    <ClInclude Include="Mail.h" />
+    <ClInclude Include="sorting.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="TestData.h" />
     <ClInclude Include="ui.h" />

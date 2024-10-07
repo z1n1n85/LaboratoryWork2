@@ -4,6 +4,7 @@
 #include  <string>
 
 template <typename T> T InputNumber(void);
+double InputDouble(void);
 int InputPositiveInt(void);
 int InputNaturalInt(void);
 std::string InputFullString(void);
