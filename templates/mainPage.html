@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %}
-RPS3
-{% endblock %}
+{% block content %}
+<h2>Существующие массивы</h2>
 
-{% block body %}
-</h1> Главная страница </h1>
+<ul>
+    {% for array in arrays %}
+        <li>{{ array }} <a href="{{ url_for('edit_array', index=loop.index0) }}">Редактировать</a></li>
+    {% endfor %}
+</ul>
+<!--<ul> - нумерованный список, <li> - элемент списка, <a - ссылка-->
+
+<a href="{{ url_for('add_array') }}">Добавить новый массив</a>
 {% endblock %}

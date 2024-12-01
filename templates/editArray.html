@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 
-{% block title %}
-EditArray
-{% endblock %}
+{% block content %}
+<h2>Редактировать массив</h2>
 
-{% block body %}
-</h1>Редачим массив</h1>
+<form action="" method="post"> <!--создаем форму, данные оставляем в форме,используем метод пост  -->
+    <input type="text" name="array" value="{{ current_array | join(',') }}" required>
+    <!--создаем текстовое поле для ввода данных -->
+
+    <button type="submit">Сохранить изменения</button>
+    <!--когда пользователь нажимает на кнопку с типом submit, браузер собирает данные, введенные в форму,
+    и отправляет их на указанный в атрибуте action адрес с помощью указанного метода  -->
+</form>
+
+<a href="{{ url_for('main_page') }}">Назад к массивам</a>
 {% endblock %}
