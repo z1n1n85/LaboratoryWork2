@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Редактировать массив</h2>
+<h1>Редактировать массив</h1>
 
-<form action="" method="post"> <!--создаем форму, данные оставляем в форме,используем метод пост  -->
-    <input type="text" name="array" value="{{ current_array | join(',') }}" required>
-    <!--создаем текстовое поле для ввода данных -->
+<form method="POST">
+    <label for="array">Введите массив (например, [1, 2, 3]):</label><br>
+    <textarea id="array" name="array" rows="4" cols="50">{{ current_array }}</textarea><br><br>
 
-    <button type="submit">Сохранить изменения</button>
-    <!--когда пользователь нажимает на кнопку с типом submit, браузер собирает данные, введенные в форму,
-    и отправляет их на указанный в атрибуте action адрес с помощью указанного метода  -->
+    <label for="is_sorted">Массив отсортирован:</label>
+    <input type="checkbox" id="is_sorted" name="is_sorted" value="true" {% if is_sorted %}checked{% endif %}><br><br>
+
+    <input type="submit" value="Сохранить">
 </form>
 
-<a href="{{ url_for('main_page') }}">Назад к массивам</a>
+<a href="/">Назад на главную</a>
 {% endblock %}
+

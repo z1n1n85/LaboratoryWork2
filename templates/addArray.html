@@ -3,12 +3,15 @@
 {% block content %}
 <h2>Добавить новый массив</h2>
 
-<form action="" method="post"> <!--создаем форму, данные оставляем в форме,используем метод пост  -->
-    <input type="text" name="array" placeholder="Введите числа через запятую" required>
-    <!--создаем текстовое поле для ввода данных -->
+<form method="post">
+    <label for="array">Введите массив (например, [1, 2, 3]):</label><br>
+    <input type="text" id="array" name="array" required><br><br>
 
-    <button type="submit">Добавить</button>
-    <!--когда пользователь нажимает на кнопку с типом submit, браузер собирает данные, введенные в форму,
-    и отправляет их на указанный в атрибуте action адрес с помощью указанного метода  -->
+    <label for="is_sorted">Массив отсортирован:</label>
+    <input type="checkbox" id="is_sorted" name="is_sorted" value="true"><br><br>
+
+    <input type="submit" value="Добавить">
 </form>
+
+<a href="{{ url_for('main_page') }}">Назад</a>
 {% endblock %}
