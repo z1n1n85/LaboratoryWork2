@@ -5,15 +5,23 @@
 
 <ul>
     {% for array in arrays %}
-        <li>
-            {{ array.array_data | tojson }}  <!-- Используем tojson для корректного отображения массива -->
-            <a href="{{ url_for('edit_array', index=array.id) }}">Редактировать</a>
-        </li>
-    {% else %}
-        <li>Нет доступных массивов.</li>  <!-- Сообщение, если массивов нет -->
+    <li>
+        {{ array.array_data }}
+        <a href="{{ url_for('edit_array', index=array.id) }}">Редактировать</a>
+    </li>
     {% endfor %}
 </ul>
 
-<a href="{{ url_for('add_array') }}">Добавить новый массив</a>  <!-- Используем url_for для генерации URL -->
-{% endblock %}
+<a href="{{ url_for('add_array') }}">Добавить новый массив</a>
 
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+{% endblock %}

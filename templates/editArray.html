@@ -1,18 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Редактировать массив</h1>
+<h1>Редактирование массива</h1>
 
 <form method="POST">
-    <label for="array">Введите массив (например, [1, 2, 3]):</label><br>
-    <textarea id="array" name="array" rows="4" cols="50">{{ current_array }}</textarea><br><br>
-
-    <label for="is_sorted">Массив отсортирован:</label>
-    <input type="checkbox" id="is_sorted" name="is_sorted" value="true" {% if is_sorted %}checked{% endif %}><br><br>
-
-    <input type="submit" value="Сохранить">
+    <input type="text" name="array" placeholder="Введите числа через пробел" value="{{ current_array }}" required>
+    <button type="submit">Сохранить</button>
 </form>
 
-<a href="/">Назад на главную</a>
+<a href="{{ url_for('main_page') }}">Назад к списку</a>
 {% endblock %}
-
