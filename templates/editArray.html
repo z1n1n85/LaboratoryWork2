@@ -1,12 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Редактирование массива</h1>
+<div class="container">
+    <h1>Редактирование массива</h1>
 
-<form method="POST">
-    <input type="text" name="array" placeholder="Введите числа через пробел" value="{{ current_array }}" required>
-    <button type="submit">Сохранить</button>
-</form>
+    <form method="POST" class="form-container">
+        <input type="text" name="array" placeholder="Введите числа через пробел" value="{{ current_array }}" required class="form-input">
 
-<a href="{{ url_for('main_page') }}">Назад к списку</a>
+        <button type="submit" class="form-button">Сохранить</button>
+        <button type="submit" name="sort" class="form-button">Отсортировать</button>
+        <button type="submit" name="delete" class="form-button">Удалить</button>
+
+        <a href="{{ url_for('main_page') }}" style="display: block; text-align: center; margin-top: 20px;">Назад к списку</a>
+    </form>
+
+
+</div>
 {% endblock %}
