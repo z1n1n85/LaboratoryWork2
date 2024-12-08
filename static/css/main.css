@@ -88,13 +88,15 @@ h1 {
 }
 
 .edit-button {
-    background-color: #f0f8ff; /* Цвет фона кнопки редактирования */
+    background-color: #e0e0e0; /* Цвет фона кнопки редактирования */
     color: black; /* Цвет текста кнопки редактирования */
     padding: 5px 10px; /* Отступы внутри кнопки */
     text-decoration: none; /* Убираем подчеркивание */
     border-radius: 3px; /* Закругленные углы кнопки */
     font-family: 'Roboto', sans-serif;
+
 }
+
 
 .edit-button:hover {
     background-color: #0056b3; /* Цвет фона при наведении */
@@ -106,7 +108,7 @@ h1 {
     width: 96%; /* Полная ширина кнопки */
     padding: 10px; /* Отступы внутри кнопки */
     margin-top: 10px; /* Отступ сверху */
-    background-color: #f0f8ff; /* Нейтральный цвет фона кнопки */
+    background-color: #e0e0e0; /* Нейтральный цвет фона кнопки */
     color: black; /* Цвет текста кнопки - черный */
     border: none; /* Убираем рамку */
     text-decoration: none; /* Убираем подчеркивание текста */

@@ -3,6 +3,7 @@
 {% block content %}
 <div class="array-container">
     <h1>Список массивов</h1>
+
         <ul>
             {% for array in arrays %}
             <li class="array-item">
@@ -25,5 +26,6 @@
             </ul>
             {% endif %}
         {% endwith %}
+
 </div>
 {% endblock %}
