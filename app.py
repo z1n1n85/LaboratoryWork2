@@ -1,12 +1,16 @@
-from flask import Flask, request, redirect, url_for, render_template, flash
+from flask import Flask, request, redirect, url_for, render_template, flash, jsonify
 from db import Database
 from sorting import sort_bitonic
+import json
 
 app = Flask(__name__)  # Создаем экземпляр приложения Flask
 app.secret_key = 'keyyyyyyyyyyyyyyyyyyy'  # Устанавливаем секретный ключ для использования сессий и flash-сообщений
 
-# Создаем экземпляр базы данных
+# Создаем экземпляр БД для пользовательских данных
 db = Database()
+# Создаем экземпляр БД для тестовых данных
+db_test = Database('test_db.db')
+
 
 # Главная страница
 @app.route('/')
@@ -92,6 +96,43 @@ def edit_array(index):
 
     # GET запрос, текущий массив на шаблон редактирования отправляем
     return render_template('editArray.html', current_array=array_string)
+
+
+# Добавление записей в тесте
+@app.route('/test-add', methods=['POST'])
+def test_add_array():
+
+    array_data = request.json  # Получаем данные массива из формы
+    # Сохраняем массив, обрабатываем ошибки
+    try:
+        db_test.add_array(array_data)
+        return jsonify({"status": "success"}), 201
+
+    except ValueError:
+        return jsonify({"status": "error"}), 400
+
+
+# Удаление всех записей из тестовой БД
+@app.route('/test-delete-all', methods=['POST'])
+def test_delete_all():
+    arrays = db_test.get_all_arrays()
+
+    for array in arrays:
+        db_test.delete_array(array.id)
+
+    return jsonify({"status": "success"}), 201
+
+
+# Сортировка всех записей из тестовой БД
+@app.route('/test-sort-all', methods=['POST'])
+def test_sort_all():
+    arrays = db_test.get_all_arrays()
+
+    for array in arrays:
+        sorted_array = sort_bitonic(array.array_data)  # Сортируем массив с помощью битонной сортировки
+        db_test.update_array(array.id, sorted_array)  # Обновляем данные
+
+    return jsonify({"status": "success"}), 201
 
 if __name__ == '__main__':
     app.run(debug=True)
